@@ -13,17 +13,46 @@ class Person(Base):
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
+    fav_planets = relationship('Fav_planets', backref='person', lazy=True)
+    fav_characters = relationship('Fav_characters', backref='person', lazy=True)
 
-class Address(Base):
-    __tablename__ = 'address'
+class Characters(Base):
+    __tablename__ = 'characters'
     # Here we define columns for the table address.
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
-    street_name = Column(String(250))
-    street_number = Column(String(250))
-    post_code = Column(String(250), nullable=False)
-    person_id = Column(Integer, ForeignKey('person.id'))
-    person = relationship(Person)
+    character_name = Column(String(250))
+    character_gender = Column(String(250))
+    character_hair_color = Column(String(250), nullable=False)
+    fav_characters = relationship('Fav_characters', backref='person', lazy=True)
+
+class Planets(Base):
+    __tablename__ = 'planets'
+    # Here we define columns for the table address.
+    # Notice that each column is also a normal Python instance attribute.
+    id = Column(Integer, primary_key=True)
+    planets_diameter = Column(String(250))
+    planets_climate = Column(String(250))
+    planets_name = Column(String(250), nullable=False)
+    fav_planets = relationship('Fav_planets', backref='person', lazy=True)
+
+class Fav_planets(Base):
+    __tablename__ = 'fav_planets'
+    # Here we define columns for the table address.
+    # Notice that each column is also a normal Python instance attribute.
+    id = Column(Integer, primary_key=True)
+    person_id = Column(Integer,ForeignKey('person.id'))
+    planets_id = Column(Integer, ForeignKey('planets.id'))
+
+
+class Fav_characters(Base):
+    __tablename__ = 'fav_characters'
+    # Here we define columns for the table address.
+    # Notice that each column is also a normal Python instance attribute.
+    id = Column(Integer, primary_key=True)
+    person_id = Column(Integer,ForeignKey('person.id'))
+    characters_id = Column(Integer, ForeignKey('characters.id'))
+
 
     def to_dict(self):
         return {}
