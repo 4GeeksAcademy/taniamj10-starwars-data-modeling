@@ -21,9 +21,12 @@ class Characters(Base):
     # Here we define columns for the table address.
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
-    character_name = Column(String(250))
-    character_gender = Column(String(250))
-    character_hair_color = Column(String(250), nullable=False)
+    name = Column(String(250))
+    gender = Column(String(250))
+    hair_color = Column(String(250), nullable=False)
+    eyes_color = Column(String(250), nullable=False)
+    age = Column(Integer, nullable=False)
+    birth_year = Column(Integer, nullable=False)
     fav_characters = relationship('Fav_characters', backref='person', lazy=True)
 
 class Planets(Base):
@@ -31,9 +34,11 @@ class Planets(Base):
     # Here we define columns for the table address.
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
-    planets_diameter = Column(String(250))
-    planets_climate = Column(String(250))
-    planets_name = Column(String(250), nullable=False)
+    diameter = Column(String(250))
+    climate = Column(String(250))
+    name = Column(String(250), nullable=False)
+    terrain = Column(Integer, nullable=False)
+    Height = Column(Integer, nullable=False)
     fav_planets = relationship('Fav_planets', backref='person', lazy=True)
 
 class Fav_planets(Base):
