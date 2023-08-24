@@ -7,14 +7,14 @@ from eralchemy2 import render_er
 
 Base = declarative_base()
 
-class Person(Base):
-    __tablename__ = 'person'
-    # Here we define columns for the table person
+class User(Base):
+    __tablename__ = 'user'
+    # Here we define columns for the table user
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
-    fav_planets = relationship('Fav_planets', backref='person', lazy=True)
-    fav_characters = relationship('Fav_characters', backref='person', lazy=True)
+    fav_planets = relationship('Fav_planets', backref='user', lazy=True)
+    fav_characters = relationship('Fav_characters', backref='user', lazy=True)
 
 class Characters(Base):
     __tablename__ = 'characters'
@@ -27,7 +27,7 @@ class Characters(Base):
     eyes_color = Column(String(250), nullable=False)
     age = Column(Integer, nullable=False)
     birth_year = Column(Integer, nullable=False)
-    fav_characters = relationship('Fav_characters', backref='person', lazy=True)
+    fav_characters = relationship('Fav_characters', backref='user', lazy=True)
 
 class Planets(Base):
     __tablename__ = 'planets'
@@ -39,14 +39,14 @@ class Planets(Base):
     name = Column(String(250), nullable=False)
     terrain = Column(Integer, nullable=False)
     Height = Column(Integer, nullable=False)
-    fav_planets = relationship('Fav_planets', backref='person', lazy=True)
+    fav_planets = relationship('Fav_planets', backref='user', lazy=True)
 
 class Fav_planets(Base):
     __tablename__ = 'fav_planets'
     # Here we define columns for the table address.
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
-    person_id = Column(Integer,ForeignKey('person.id'))
+    user_id = Column(Integer,ForeignKey('user.id'))
     planets_id = Column(Integer, ForeignKey('planets.id'))
 
 
@@ -55,7 +55,7 @@ class Fav_characters(Base):
     # Here we define columns for the table address.
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
-    person_id = Column(Integer,ForeignKey('person.id'))
+    user_id = Column(Integer,ForeignKey('user.id'))
     characters_id = Column(Integer, ForeignKey('characters.id'))
 
 
