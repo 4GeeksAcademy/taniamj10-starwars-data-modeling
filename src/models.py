@@ -13,6 +13,9 @@ class User(Base):
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
+    username = Column(String(250), nullable=False)
+    email = Column(String(250), nullable=False)
+    password = Column(String(250), nullable=False)
     fav_planets = relationship('Fav_planets', backref='user', lazy=True)
     fav_characters = relationship('Fav_characters', backref='user', lazy=True)
 
